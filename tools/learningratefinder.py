@@ -71,11 +71,12 @@ class LearningRateFinder:
 
 	def find(self, trainData, startLR, endLR, epochs=None,
 		stepsPerEpoch=None, batchSize=32, sampleSize=2048,
-		verbose=1):
+		verbose=1, useGen):
 		# reset our class-specific variables
 		self.reset()
 		# determine if we are using a data generator or not
-		useGen = self.is_data_iter(trainData)
+# 		useGen = self.is_data_iter(trainData)
+# 		print('Using generator: , useGen)
 		# if we're using a generator and the steps per epoch is not
 		# supplied, raise an error
 		if useGen and stepsPerEpoch is None:
@@ -118,7 +119,8 @@ class LearningRateFinder:
 			self.on_batch_end(batch, logs))
 		# check to see if we are using a data iterator
 		if useGen:
-			self.model.fit_generator( # changed from model.fit
+			print('train with generator')
+			self.model.fit(
 				x=trainData,
 				steps_per_epoch=stepsPerEpoch,
 				epochs=epochs,
