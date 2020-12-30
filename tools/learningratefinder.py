@@ -69,9 +69,9 @@ class LearningRateFinder:
 		lr *= self.lrMult
 		K.set_value(self.model.optimizer.lr, lr)
 
-	def find(self, trainData, startLR, endLR, epochs=None,
+	def find(self, trainData, startLR, endLR, useGen= True, epochs=None,
 		stepsPerEpoch=None, batchSize=32, sampleSize=2048,
-		verbose=1, useGen):
+		verbose=1):
 		# reset our class-specific variables
 		self.reset()
 		# determine if we are using a data generator or not
