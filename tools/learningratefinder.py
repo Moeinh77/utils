@@ -76,7 +76,7 @@ class LearningRateFinder:
 		self.reset()
 		# determine if we are using a data generator or not
 # 		useGen = self.is_data_iter(trainData)
-# 		print('Using generator: , useGen)
+		print('Using generator: , useGen)
 		# if we're using a generator and the steps per epoch is not
 		# supplied, raise an error
 		if useGen and stepsPerEpoch is None:
