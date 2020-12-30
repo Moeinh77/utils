@@ -119,7 +119,6 @@ class LearningRateFinder:
 			self.on_batch_end(batch, logs))
 		# check to see if we are using a data iterator
 		if useGen:
-			print('train with generator')
 			self.model.fit(
 				x=trainData,
 				steps_per_epoch=stepsPerEpoch,
