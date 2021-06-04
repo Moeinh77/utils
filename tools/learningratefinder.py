@@ -143,11 +143,27 @@ class LearningRateFinder:
 		# grab the learning rate and losses values to plot
 		lrs = self.lrs[skipBegin:-skipEnd]
 		losses = self.losses[skipBegin:-skipEnd]
+		
+		max_diff = 0
+
+		for i in range(0, len(losses)-1):
+			
+			l1 = losses[i]
+			l2 = losses[i+1]
+			diff = l1-l2
+			if diff > max_diff:
+				max_diff = diff
+				best_lr = lrs[i+1]
+				loss_at_best = losses[i+1]
+		
 		# plot the learning rate vs. loss
 		plt.plot(lrs, losses)
 		plt.xscale("log")
 		plt.xlabel("Learning Rate (Log Scale)")
 		plt.ylabel("Loss")
+		plt.scatter(best_lr, loss_at_best, marker='x', c = '#ff7f0e')
 		# if the title is not empty, add it to the plot
 		if title != "":
 			plt.title(title)
+		plt.show()
+		print('steepest point:', best_lr)
