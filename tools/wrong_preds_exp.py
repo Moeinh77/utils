@@ -29,8 +29,12 @@ def show_wrong_cases(predictions, true_classes, num_classes, images, one_hot = T
         plt.show()
     
     if most_confused: # make it so that only wrong preds show
-        CCE = tf.keras.losses.CategoricalCrossentropy(reduction=tf.keras.losses.Reduction.NONE)
-        losses = CCE(true_classes, predictions).numpy()
+        if one_hot:
+            LF = tf.keras.losses.CategoricalCrossentropy(reduction=tf.keras.losses.Reduction.NONE)
+        else:
+            LF = tf.keras.losses.BinaryCrossentropy(reduction=tf.keras.losses.Reduction.NONE)
+
+        losses = LF(true_classes, predictions).numpy()
         
         highest_loss_ind = losses.argsort()[-k:] #np.argmax(losses)
         
