@@ -1,5 +1,6 @@
 import numpy as np
 import tensorflow as tf
+import matplotlib.pyplot as plt
 
 def show_wrong_cases(predictions, true_classes, num_classes, images, one_hot = True,
                      show_count_plot = True, most_confused = True, k = 3):
@@ -43,7 +44,6 @@ def show_wrong_cases(predictions, true_classes, num_classes, images, one_hot = T
         
         f, ax = plt.subplots(k, figsize=(4,20))
         for i in range(0, k):
-#             img = plt.imread(images[i])
             ax[i].imshow(images[highest_loss_ind[i]])
             ax[i].set_title('true class: '+str(np.argmax(true_classes[highest_loss_ind[i]])+1)
               +'/ predicted: '+ str(np.argmax(predictions[highest_loss_ind[i]])+1)+'/ idx: '+ str(highest_loss_ind[i]))
